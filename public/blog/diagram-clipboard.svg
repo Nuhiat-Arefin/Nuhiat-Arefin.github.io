@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Tokio side -->
+  <rect x="30" y="60" width="220" height="110" rx="10" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+  <text x="140" y="92" text-anchor="middle" font-size="16" fill="#111">Tokio runtime</text>
+  <text x="140" y="114" text-anchor="middle" font-size="12.5" font-family="ui-monospace, Menlo, monospace" fill="#555">D-Bus service</text>
+  <text x="140" y="146" text-anchor="middle" font-size="11.5" font-style="italic" fill="#888">gated by clipboard_requested</text>
+
+  <!-- Wayland side -->
+  <rect x="470" y="60" width="220" height="110" rx="10" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+  <text x="580" y="92" text-anchor="middle" font-size="16" fill="#111">Wayland thread</text>
+  <text x="580" y="114" text-anchor="middle" font-size="12.5" font-family="ui-monospace, Menlo, monospace" fill="#555">calloop event loop</text>
+  <text x="580" y="146" text-anchor="middle" font-size="11.5" font-style="italic" fill="#888">ext_data_control_manager_v1</text>
+
+  <!-- forward channel -->
+  <path d="M 250 92 L 468 92" fill="none" stroke="#3b63d8" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <text x="359" y="82" text-anchor="middle" font-size="12" font-family="ui-monospace, Menlo, monospace" fill="#3b63d8">bounded sync_channel</text>
+
+  <!-- return channel -->
+  <path d="M 468 140 L 252 140" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <text x="359" y="158" text-anchor="middle" font-size="11" font-family="ui-monospace, Menlo, monospace" fill="#555">mpsc + watch · oneshot replies</text>
+
+  <!-- labels -->
+  <text x="359" y="196" text-anchor="middle" font-size="12" fill="#777">requests cross over; events, ownership and replies flow back</text>
+</svg>

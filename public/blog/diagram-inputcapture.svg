@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 230" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- app -->
+  <rect x="20" y="70" width="170" height="80" rx="10" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+  <text x="105" y="102" text-anchor="middle" font-size="15" fill="#111">Deskflow /</text>
+  <text x="105" y="122" text-anchor="middle" font-size="15" fill="#111">Synergy</text>
+
+  <!-- portal half -->
+  <rect x="270" y="70" width="200" height="80" rx="10" fill="#f4f6fb" stroke="#3b63d8" stroke-width="1.5"/>
+  <text x="370" y="100" text-anchor="middle" font-size="15" fill="#111">InputCapture portal</text>
+  <text x="370" y="121" text-anchor="middle" font-size="12" font-family="ui-monospace, Menlo, monospace" fill="#555">luminous (built)</text>
+
+  <!-- compositor half (missing) -->
+  <rect x="550" y="70" width="150" height="80" rx="10" fill="none" stroke="#b0453c" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="625" y="100" text-anchor="middle" font-size="15" fill="#b0453c">compositor</text>
+  <text x="625" y="121" text-anchor="middle" font-size="12" font-family="ui-monospace, Menlo, monospace" fill="#b0453c">sway (missing)</text>
+
+  <!-- arrows -->
+  <path d="M 190 110 L 266 110" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <text x="230" y="99" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, monospace" fill="#777">D-Bus</text>
+
+  <path d="M 546 110 L 474 110" fill="none" stroke="#b0453c" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr3)"/>
+  <text x="508" y="99" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, monospace" fill="#b0453c">EIS events</text>
+
+  <text x="360" y="190" text-anchor="middle" font-size="12.5" fill="#777">KWin and Mutter already ship the right-hand half; wlroots doesn't yet</text>
+</svg>
