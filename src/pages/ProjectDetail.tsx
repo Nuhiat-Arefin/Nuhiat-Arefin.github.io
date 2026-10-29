@@ -117,10 +117,33 @@ export default function ProjectDetail() {
           )}
         </div>
 
+        {project.privateReports && project.privateReports.length > 0 && (
+          <section className="mt-14">
+            <h2 className="font-serif-display text-xl font-bold tracking-tight">
+              Private Reporting ({project.privateReports.length})
+            </h2>
+            <ul className="mt-6 space-y-2">
+              {project.privateReports.map((report) => (
+                <li key={`${report.project}-${report.title}`} className="flex items-start gap-2.5">
+                  <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-purple-500" />
+                  <a
+                    href={report.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="link-underline text-[15px] leading-7 text-foreground/85"
+                  >
+                    {report.project} — {report.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         {project.issues && project.issues.length > 0 && (
           <section className="mt-14">
             <h2 className="font-serif-display text-xl font-bold tracking-tight">
-              All issues reported ({project.issues.length})
+              {project.privateReports ? 'Public Issues' : 'All issues reported'} ({project.issues.length})
             </h2>
             <div className="mt-6 space-y-8">
               {[
@@ -144,15 +167,20 @@ export default function ProjectDetail() {
                             issue.state === 'open' ? 'bg-green-500' : 'bg-purple-500'
                           }`}
                         />
-                        <a
-                          href={issue.url ?? `https://github.com/${repo}/issues/${issue.number}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="link-underline text-[15px] leading-7 text-foreground/85"
-                        >
-                          <span className="text-muted-foreground">#{issue.number}</span>{' '}
-                          {issue.title}
-                        </a>
+                        <span className="text-[15px] leading-7">
+                          <a
+                            href={issue.url ?? `https://github.com/${repo}/issues/${issue.number}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="link-underline text-foreground/85"
+                          >
+                            <span className="text-muted-foreground">#{issue.number}</span>{' '}
+                            {issue.title}
+                          </a>
+                          {issue.note && (
+                            <span className="text-muted-foreground"> [{issue.note}]</span>
+                          )}
+                        </span>
                       </li>
                     ))}
                   </ul>
