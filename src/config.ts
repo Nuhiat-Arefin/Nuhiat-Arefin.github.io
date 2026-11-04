@@ -32,7 +32,7 @@ export interface Project {
   tags: string[]
   links: Link[]
   issues?: Issue[]
-  privateReports?: Array<{ project: string; title: string; url: string }>
+  privateReports?: Array<{ project: string; title: string; url?: string; note?: string }>
   refs?: Record<string, string>
   featured?: boolean
 }
@@ -52,6 +52,7 @@ export interface Achievement {
   title: string
   detail: string
   year: string
+  url?: string
 }
 
 export interface SkillGroup {
@@ -73,6 +74,21 @@ export const identity = {
   github: 'https://github.com/Nuhiat-Arefin',
   resumeUrl: '/resume.pdf', // hosted from public/
 }
+
+export const cves = [
+  {
+    id: 'CVE-2026-55865',
+    project: 'Python Liquid',
+    detail: 'Credited for an infinite loop when parsing malformed case tags in Python Liquid, found via grammar-based fuzzing.',
+    url: 'https://github.com/advisories/GHSA-vq2f-vcc9-j8mv',
+  },
+  {
+    id: 'CVE-2026-106120',
+    project: 'LiquidJS',
+    detail: 'Reported an ownPropertyOnly bypass in LiquidJS that exposed inherited array properties through filters and iteration.',
+    url: 'https://github.com/advisories/GHSA-fwxr-j5w2-587m',
+  },
+]
 
 export const about = [
   "I'm an undergraduate studying Computer Science and Engineering at the Islamic University of Technology (IUT), on a partial scholarship. I enjoy using fuzzing to find real bugs, and I contribute fixes and tests back to open-source projects.",
@@ -256,7 +272,11 @@ export const projects: Project[] = [
     summary:
       'The findings included consensus-validation failures, authorization and ownership-validation bypasses, payment disruption and double-payment risks, denial-of-service conditions, and parser correctness failures.',
     tags: ['BOLT11', 'Lightning', 'Cashu'],
-    links: [],
+    links: [
+      { label: 'ngx-l402 v1.3.2 — reporter acknowledgement', url: 'https://github.com/ngx-l402/ngx-l402/releases/tag/v1.3.2' },
+      { label: 'Eclair v0.14.5 — responsible disclosure credit', url: 'https://github.com/ACINQ/eclair/releases/tag/v0.14.5' },
+      { label: 'Core Lightning v26.06.10 — responsible disclosure credit', url: 'https://github.com/ElementsProject/lightning/releases/tag/v26.06.10' },
+    ],
     issues: [
       { repo: 'lightningdevkit/rust-lightning', number: 5332, state: 'closed', title: 'Bolt11Invoice reads an amount of 18,446,745 BTC or more without a multiplier as no amount', url: 'https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5332' },
       { repo: 'alexbosworth/invoices', number: 16, state: 'closed', title: 'U+212A accepted in place of `k` in parsePaymentRequest' },
@@ -315,6 +335,30 @@ export const projects: Project[] = [
       { project: 'Nutmix', title: 'A SIG_ALL bypass caused by duplicate tags members being interpreted differently during signature validation', url: 'https://github.com/lescuer97/nutmix/commit/e9a7b75c4beb4d3a748e80ae34597c67d94116fd' },
     ],
   },
+  {
+    slug: 'november-2026-security-reports',
+    title: 'November 2026: Libbitcoin Security Reports',
+    org: '',
+    period: 'November 2026',
+    summary: '',
+    tags: [],
+    links: [],
+    issues: [
+      { repo: 'libbitcoin/libbitcoin-system', number: 2136, state: 'closed', title: 'Memory exhaustion in block deserialization, reachable by remote peers', url: 'https://github.com/libbitcoin/libbitcoin-system/issues/2136' },
+      { repo: 'libbitcoin/libbitcoin-system', number: 2137, state: 'closed', title: 'Memory exhaustion in transaction deserialization, reachable by remote peers', url: 'https://github.com/libbitcoin/libbitcoin-system/issues/2137' },
+      { repo: 'libbitcoin/libbitcoin-system', number: 2138, state: 'closed', title: 'PSBT key and value lengths cause std::length_error in entry parsing', url: 'https://github.com/libbitcoin/libbitcoin-system/issues/2138' },
+      { repo: 'libbitcoin/libbitcoin-system', number: 2139, state: 'closed', title: 'PSBT v2 counts cause std::length_error in parse_global', url: 'https://github.com/libbitcoin/libbitcoin-system/issues/2139' },
+      { repo: 'libbitcoin/libbitcoin-network', number: 993, state: 'closed', title: 'Memory exhaustion in blocktxn deserialization, reachable by remote peers', url: 'https://github.com/libbitcoin/libbitcoin-network/issues/993' },
+      { repo: 'libbitcoin/libbitcoin-network', number: 994, state: 'closed', title: 'Memory exhaustion in cmpctblock deserialization, reachable by remote peers', url: 'https://github.com/libbitcoin/libbitcoin-network/issues/994' },
+    ],
+    privateReports: [
+      { project: 'libbitcoin-network', title: 'Use-after-free in progressive HTTP parser teardown', url: 'https://github.com/libbitcoin/libbitcoin-network/commit/eede59d284ed66c25a13d121f2725382b61185e2' },
+      { project: 'libbitcoin-system', title: 'HKDF counter wrap writes past the output buffer', url: 'https://github.com/libbitcoin/libbitcoin-system/commit/92cffbe1691289181c3e623fd80c547e69976fd2' },
+      { project: 'libbitcoin-system', title: 'Out-of-bounds read in binary::operator[]', url: 'https://github.com/libbitcoin/libbitcoin-system/commit/462638b5fe3c2d3c1529317ee06840ddf65a0320' },
+      { project: 'libbitcoin-system', title: 'Fixed-array deserialization writes past the destination', url: 'https://github.com/libbitcoin/libbitcoin-system/commit/722bda20191f2869f13cc21f884395a806d2cbea' },
+      { project: 'libbitcoin-database', title: 'get_outs_key uses a raw pointer after output-table remapping', url: 'https://github.com/libbitcoin/libbitcoin-database/commit/442b9d04c8bd369dafa30a1ae4c69b3c5bb2b9d6' },
+    ],
+  },
 ]
 
 /* ── Research ─────────────────────────────────────────────── */
@@ -341,11 +385,12 @@ export const achievements: Achievement[] = [
     detail: 'Received Red Team Fund grant for grammar-based fuzzing.',
     year: '2026',
   },
-  {
-    title: 'CVE-2026-55865',
-    detail: 'Credited with a CVE for an infinite-loop hang in Python Liquid, found via grammar-based fuzzing.',
+  ...cves.map((cve) => ({
+    title: cve.id,
+    detail: cve.detail,
     year: '2026',
-  },
+    url: cve.url,
+  })),
   {
     title: 'GSoC 2026 Contributor',
     detail: 'Selected contributor with CCExtractor Development: XDG portal backend for Regolith (luminous), in Rust.',

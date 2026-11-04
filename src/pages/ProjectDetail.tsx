@@ -72,50 +72,56 @@ export default function ProjectDetail() {
           {project.title}
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          {project.org} · {project.period}
+          {project.org && `${project.org} · `}{project.period}
         </p>
 
-        <p className="mt-8 text-[18px] leading-8 text-foreground/85">{project.summary}</p>
+        {project.summary && (
+          <p className="mt-8 text-[18px] leading-8 text-foreground/85">{project.summary}</p>
+        )}
         {project.description && (
           <p className="mt-4 text-[18px] leading-8 text-foreground/85">
             {linkifyRefs(project.description, buildRefMap(project))}
           </p>
         )}
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          {project.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+        {project.tags.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
 
-        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
-          {project.links.map((l) =>
-            l.url.startsWith('/') ? (
-              <Link
-                key={l.url}
-                to={l.url}
-                className="inline-flex items-center gap-1 text-sm link-underline"
-              >
-                {l.label} <ArrowUpRight className="h-3.5 w-3.5" />
-              </Link>
-            ) : (
-              <a
-                key={l.url}
-                href={l.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-sm link-underline"
-              >
-                {l.label} <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            ),
-          )}
-        </div>
+        {project.links.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+            {project.links.map((l) =>
+              l.url.startsWith('/') ? (
+                <Link
+                  key={l.url}
+                  to={l.url}
+                  className="inline-flex items-center gap-1 text-sm link-underline"
+                >
+                  {l.label} <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              ) : (
+                <a
+                  key={l.url}
+                  href={l.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm link-underline"
+                >
+                  {l.label} <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              ),
+            )}
+          </div>
+        )}
 
         {project.privateReports && project.privateReports.length > 0 && (
           <section className="mt-14">
@@ -126,14 +132,25 @@ export default function ProjectDetail() {
               {project.privateReports.map((report) => (
                 <li key={`${report.project}-${report.title}`} className="flex items-start gap-2.5">
                   <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-purple-500" />
-                  <a
-                    href={report.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="link-underline text-[15px] leading-7 text-foreground/85"
-                  >
-                    {report.project} — {report.title}
-                  </a>
+                  <div className="min-w-0">
+                    {report.url ? (
+                      <a
+                        href={report.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="link-underline text-[15px] leading-7 text-foreground/85"
+                      >
+                        {report.project} — {report.title}
+                      </a>
+                    ) : (
+                      <span className="text-[15px] leading-7 text-foreground/85">
+                        {report.project} — {report.title}
+                      </span>
+                    )}
+                    {report.note && (
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{report.note}</p>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

@@ -10,10 +10,10 @@ export function Section({
   children: ReactNode
 }) {
   return (
-    <section id={id} className="border-t border-border py-14">
-      <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-muted-foreground">
+    <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-20 border-t border-border py-14">
+      <h2 id={`${id}-heading`} className="font-mono-code text-xs uppercase tracking-[0.2em] text-muted-foreground">
         {label}
-      </p>
+      </h2>
       <div className="mt-8">{children}</div>
     </section>
   )

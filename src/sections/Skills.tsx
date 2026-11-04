@@ -7,9 +7,9 @@ export default function Skills() {
       <div className="space-y-6">
         {skills.map((g) => (
           <div key={g.name}>
-            <p className="font-mono-code text-xs uppercase tracking-widest text-muted-foreground">
+            <h3 className="font-mono-code text-xs uppercase tracking-widest text-muted-foreground">
               {g.name}
-            </p>
+            </h3>
             <div className="mt-3 flex flex-wrap gap-2">
               {g.items.map((s) => (
                 <span

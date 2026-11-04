@@ -1,5 +1,6 @@
 import { FileText, Github, Linkedin, Mail, Twitter } from 'lucide-react'
-import { identity } from '../config'
+import { Link } from 'react-router'
+import { cves, identity } from '../config'
 
 export default function Hero() {
   return (
@@ -11,6 +12,27 @@ export default function Hero() {
         {identity.name}
       </h1>
       <p className="mt-6 max-w-[60ch] text-lg leading-8 text-foreground/80">{identity.tagline}</p>
+
+      <ul aria-label="Career highlights" className="mt-8 grid grid-cols-3 gap-4 border-y border-border py-5">
+        <li>
+          <a href="#achievements" className="text-sm font-semibold link-underline">OpenSats Grantee</a>
+          <p className="mt-2 text-xs leading-5 text-muted-foreground">Red Team Fund</p>
+        </li>
+        <li>
+          <a href="#achievements" className="text-sm font-semibold link-underline">{cves.length} CVEs</a>
+          <ul className="mt-2 space-y-1 text-xs leading-5 text-muted-foreground">
+            {cves.map((cve) => (
+              <li key={cve.id}>
+                <a href={cve.url} target="_blank" rel="noreferrer" aria-label={`${cve.project}: ${cve.id}`} className="link-underline">{cve.project}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <Link to="/gsoc-2026" className="text-sm font-semibold link-underline">GSoC 2026</Link>
+          <p className="mt-2 text-xs leading-5 text-muted-foreground">CCExtractor Development</p>
+        </li>
+      </ul>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
         <a href={`mailto:${identity.email}`} className="inline-flex items-center gap-2 link-underline">
