@@ -8,6 +8,7 @@ const links = [
   { label: 'Research', href: '#research' },
   { label: 'Writing', href: '#writing' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Sponsor', href: '#sponsor' },
 ]
 
 export default function Nav() {

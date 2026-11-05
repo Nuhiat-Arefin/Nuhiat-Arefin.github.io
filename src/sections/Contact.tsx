@@ -50,6 +50,23 @@ export default function Contact() {
         </a>
       </div>
 
+      <div id="sponsor" className="mt-10 scroll-mt-20" aria-labelledby="support-heading">
+        <h4 id="support-heading" className="font-mono-code text-xs uppercase tracking-widest text-muted-foreground">
+          Support my work
+        </h4>
+        <p className="mt-3 text-sm leading-7 text-foreground/80">
+          <a
+            href="bitcoin:bc1qdsp49d3lxhwgnv4nxzvv54w2mzvltvwxtm33j5"
+            className="inline-flex max-w-full flex-wrap items-baseline gap-x-2 link-underline"
+          >
+            <span className="font-semibold text-foreground">Bitcoin</span>
+            <span className="break-all font-mono-code text-xs sm:text-sm">
+              bc1qdsp49d3lxhwgnv4nxzvv54w2mzvltvwxtm33j5
+            </span>
+          </a>
+        </p>
+      </div>
+
       <footer className="mt-16 border-t border-border pt-6 pb-2 text-xs text-muted-foreground">
         © {new Date().getFullYear()} {identity.name}
       </footer>
